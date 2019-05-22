@@ -1,0 +1,192 @@
+{% load static wagtailuserbar wagtailcore_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+      {% block title %}
+        {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+    {% endblock %}
+    {% block title_suffix %}
+        {% with self.get_site.site_name as site_name %}
+            {% if site_name %}- {{ site_name }}{% endif %}
+        {% endwith %}
+    {% endblock %}
+  </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {# Global stylesheets #}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/woodcraftgallery.css' %}">
+
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300i,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "fonts/icomoon/style.css" %}">
+
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/magnific-popup.css" %}">
+    <link rel="stylesheet" href="{% static "css/jquery-ui.css" %}">
+    <link rel="stylesheet" href="{% static "css/owl.carousel.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/owl.theme.default.min.css" %}">
+
+    <link rel="stylesheet" href="{% static "css/lightgallery.min.css" %}">
+
+    <link rel="stylesheet" href="{% static "css/bootstrap-datepicker.css" %}">
+
+    <link rel="stylesheet" href="{% static "fonts/flaticon/font/flaticon.css" %}">
+
+    <link rel="stylesheet" href="{% static "css/swiper.css" %}">
+
+    <link rel="stylesheet" href="{% static "css/aos.css" %}">
+
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+
+    {% block extra_css %}
+        {# Override this in templates to add extra stylesheets #}
+    {% endblock %}
+
+  </head>
+  <body class="{% block body_class %}{% endblock %}">
+    {% wagtailuserbar %}
+
+    <div class="site-wrap">
+
+      <div class="site-mobile-menu">
+        <div class="site-mobile-menu-header">
+          <div class="site-mobile-menu-close mt-3">
+            <span class="icon-close2 js-menu-toggle"></span>
+          </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+      </div>
+
+    {% block navbar %}
+    <!-- Navbar -->
+
+      <header class="site-navbar py-3" role="banner">
+
+        <div class="container-fluid">
+          <div class="row align-items-center">
+
+            <div class="col-9 col-xl-3 logo text-left" data-aos="fade-down">
+              <h1 class="mb-0"><a href="{% slugurl 'home' %}" class="text-black h5 mb-0"><span style="color: orange; font-family: "Times New Roman", Times, serif;">WOODCRAFT</span> <span style="color:darkblue; font-family: "Times New Roman", Times, serif;">GALLERY</span></a></h1>
+            </div>
+            <div class="col-10 col-md-6 d-none d-xl-block" data-aos="fade-down">
+              <nav class="site-navigation position-relative text-right text-lg-center" role="navigation">
+
+                <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block">
+                  {% with par=page.get_parent.specific %}
+                <li><a href="{% pageurl par %}">{{ par.title }}</a><li>
+                  {% endwith %}
+                  {% for sibs in page.get_siblings %}
+                    {% with sibs=sibs.specific %}
+                  <li><a href="{% pageurl sibs %}">{{ sibs.title }}</a><li>
+                    {% endwith %}
+                  {% endfor %}
+                </ul>
+              </nav>
+            </div>
+
+            <div class="col-3 col-xl-3 text-right" data-aos="fade-down">
+              <div class="d-none d-xl-inline-block">
+                <ul class="site-menu js-clone-nav ml-auto list-unstyled d-flex text-right mb-0" data-class="social">
+                  <li>
+                    <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+                  </li>
+                  <li>
+                    <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
+                  </li>
+                  <li>
+                    <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+                  </li>
+                  <li>
+                    <a href="#" class="pl-3 pr-3"><span class="icon-youtube-play"></span></a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </header>
+    <!-- End of Navbar -->
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+
+
+    <!-- Footer -->
+    {% block footer %}
+    <div class="site-footer py-4">
+      <div class="container-fluid">
+        <!-- <div class="row">
+          <div class="col-md-6 col-lg-6 col-xl-4 text-center">
+
+          </div>
+          <div class="col-md-6 col-lg-6 col-xl-4"></div>
+          <div class="col-md-6 col-lg-6 col-xl-4">
+            <form class="" action="#" method="post">
+              <div class="row form-group">
+
+                <div class="col-md-10">
+                  <label class="footer-heading" for="subscribe">Subscribe To Our Newsletter:</label>
+                  <input type="text" id="subscribe" class="form-control">
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <div class="col-md-10">
+                  <input type="submit" value="Subscribe" class="btn btn-primary py-2 px-4 text-white">
+                </div>
+              </div>
+
+            </form>
+          </div>
+
+        </div> -->
+        <p class="text-center">
+        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        <!-- Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | Developed with <i class="icon-heart-o" aria-hidden="true"></i> by <a href="#">Dipesh Jung Pandey</a> | Template by <a href="https://colorlib.com" target="_blank" >Colorlib</a> -->
+        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        2019 | Woodcraft Gallery&trade;
+        </p>
+      </div>
+    </div>
+    {% endblock %}
+    <!-- End of Footer -->
+    </div>
+    {# Global javascript #}
+    <script type="text/javascript" src="{% static 'js/woodcraftgallery.js' %}"></script>
+    <script src="{% static "js/jquery-3.3.1.min.js" %}"></script>
+    <script src="{% static "js/jquery-migrate-3.0.1.min.js" %}"></script>
+    <script src="{% static "js/jquery-ui.js" %}"></script>
+    <script src="{% static "js/popper.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/owl.carousel.min.js" %}"></script>
+    <script src="{% static "js/jquery.stellar.min.js" %}"></script>
+    <script src="{% static "js/jquery.countdown.min.js" %}"></script>
+    <script src="{% static "js/jquery.magnific-popup.min.js" %}"></script>
+    <script src="{% static "js/bootstrap-datepicker.min.js" %}"></script>
+    <script src="{% static "js/swiper.min.js" %}"></script>
+    <script src="{% static "js/aos.js" %}"></script>
+
+    <script src="{% static "js/picturefill.min.js" %}"></script>
+    <script src="{% static "js/lightgallery-all.min.js" %}"></script>
+    <script src="{% static "js/jquery.mousewheel.min.js" %}"></script>
+    <script src="{% static "js/main.js" %}"></script>
+
+    <script>
+      $(document).ready(function(){
+        $('#lightgallery').lightGallery();
+      });
+    </script>
+
+    {% block extra_js %}
+        {# Override this in templates to add extra javascript #}
+    {% endblock %}
+
+  </body>
+</html>

@@ -1,0 +1,54 @@
+{% extends "base2.html" %}
+{% load static wagtailimages_tags wagtailcore_tags %}
+
+{% block extra_css %}
+  <style media="screen">
+    .drop-cap {
+      font-size: 50px;
+      line-height: 1.4em;
+      font-weight: bold;
+      vertical-align: middle;
+      padding: 1 3px;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+
+  <!-- Main Section -->
+
+  <div class="site-section"  data-aos="fade-up" data-aos-delay="200">
+    <div class="container-fluid">
+
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+
+          <div class="row">
+            <div class="col-12">
+              <h2 class="site-section-heading text-center">{{ page.posttitle }}</h2>
+              <h5 class="text-center">{{ page.first_published_at|date:"D d M Y" }}</h5>
+            </div>
+          </div>
+            <div class="row site-section justify-content-center" style="padding-top: 25px;">
+              <div class="col-md-8 col-lg-8 col-xl-8">
+                <div class="mb-4">
+                  {% image page.featured_image max-1000x360 class="img-fluid mx-auto d-block" %}
+                  <p class="text-center figure-caption">{{ page.featured_image_caption }}</p>
+                  <hr>
+                  <h3 class="text-center">{{ page.subheading }}</h3>
+                </div>
+                <hr>
+                  {{ page.body|richtext }}
+                  <hr>
+              </div>
+            </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- End of Main section -->
+
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static wagtailimages_tags wagtailcore_tags%}
+
+{% block navbar %}
+<!-- Navbar -->
+
+  <header class="site-navbar py-3" role="banner">
+
+    <div class="container-fluid">
+      <div class="row align-items-center">
+
+        <div class="col-9 col-xl-3 text-left" data-aos="fade-down">
+          <h1 class="mb-0"><a href="{% slugurl 'home' %}" class="text-black h5 mb-0"><span style="color: orange; font-family: "Times New Roman", Times, serif;">WOODCRAFT</span> <span style="color:darkblue; font-family: "Times New Roman", Times, serif;">GALLERY</span></a></h1>
+        </div>
+        <div class="col-10 col-md-6 d-none d-xl-block" data-aos="fade-down">
+          <nav class="site-navigation position-relative text-right text-lg-center" role="navigation">
+
+            <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block">
+              <li class="active"><a href="{% pageurl page %}">{{ page.title }}</a></li>
+              {% for chil in page.get_children %}
+                {% with chil=chil.specific %}
+              <li><a href="{% pageurl chil %}">{{ chil.title }}</a><li>
+                {% endwith %}
+              {% endfor %}
+            </ul>
+          </nav>
+        </div>
+
+        <div class="col-3 col-xl-3 text-right" data-aos="fade-down">
+          <div class="d-none d-xl-inline-block">
+            <ul class="site-menu js-clone-nav ml-auto list-unstyled d-flex text-right mb-0" data-class="social">
+              <li>
+                <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+              </li>
+              <li>
+                <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
+              </li>
+              <li>
+                <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+              </li>
+              <li>
+                <a href="#" class="pl-3 pr-3"><span class="icon-youtube-play"></span></a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </header>
+<!-- End of Navbar -->
+{% endblock %}
+
+  {% block content %}
+  <!-- Slider -->
+
+  <div class="container-fluid" data-aos="fade" data-aos-delay="500">
+    <div class="swiper-container images-carousel">
+        <div class="swiper-wrapper">
+          {% for page in featured_pages %}
+            <div class="swiper-slide">
+              <div class="image-wrap">
+                <div class="image-info">
+                  <h2 class="mb-3">{{ page.title }}</h2>
+                  <a href="{% pageurl page %}" class="btn btn-outline-white py-2 px-4">More</a>
+                </div>
+                {% image page.featured_image fill-520x816 %}
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-scrollbar"></div>
+    </div>
+  </div>
+  <!-- End of Slider -->
+
+
+  <!-- Location Section -->
+
+  <div  class="site-section" data-aos="fade-up" data-aos-delay="200" style="padding-top: 0;">
+    <div class="container-fluid">
+
+
+    </div>
+  </div>
+  <!-- End of Locaation section -->
+{% endblock %}

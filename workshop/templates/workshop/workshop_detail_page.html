@@ -1,0 +1,110 @@
+{% extends "base2.html" %}
+{% load static wagtailimages_tags wagtailcore_tags %}
+
+{% block content %}
+  <!-- Main Section -->
+
+  <div class="site-section" data-aos="fade-up" data-aos-delay="200">
+    <div class="container-fluid">
+
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+
+          <div class="row">
+            <div class="col-12">
+              <h2 class="site-section-heading text-center">{{ page.workshop_title }}</h2>
+            </div>
+          </div>
+
+          {% if page.extra_information %}
+          <div class="row justify-content-center mt-3">
+            <div class="col-6">
+              <div class="alert alert-warning text-center">
+                {{ page.extra_information }}
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          <div class="row site-section justify-content-left" style="padding-top: 40px; padding-bottom: 5px;">
+            <div class="col-md-12 col-lg-6 col-xl-4" style="padding: 0px 40px;">
+              <div class="mb-4">
+                <div class="row" id="lightgallery">
+                {% for item in page.workshop_images.all %}
+                    {% image item.image max-1000x360 as tmp_image %}
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 item" data-aos="fade" data-src="{{ tmp_image.url }}" data-sub-html="<p>{{ item.caption }}</p>">
+                      <a href="#"><img src="{{ tmp_image.url }}" alt="{{ tmp_image.alt }}" class="img-fluid"></a>
+                    </div>
+                {% endfor %}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-lg-6 col-xl-4">
+              {{ page.introduction|richtext }}
+            </div>
+            <div class="col-md-12 col-lg-6 col-xl-4">
+              <div class="card border-secondary">
+                <div class="card-body">
+                  <div class="row justify-content-center mb-1 mt-3">
+                    <div class="col-10">
+                      <h3 class="text-black">Medium</h3>
+                      {% with medium=page.medium.all %}
+                      {% if medium %}
+                        {% for medium in medium %}
+                          <p><span class="icon-arrow-right" style="margin-right: 5px;"></span>{{ medium.name }}</p>
+                        {% endfor %}
+                      {% endif %}
+                      {% endwith %}
+                      {% if page.medium_detail %}
+                      <p><em>{{ page.medium_detail }}</em></p>
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="row justify-content-center mb-1">
+                    <div class="col-10">
+                      <h3 class="text-black">Duration</h3>
+                      <p><span class="icon-arrow-right" style="margin-right: 5px;"></span>Approx. {{ page.duration }} hours</p>
+                    </div>
+                  </div>
+                  {% if page.date %}
+                  <div class="row justify-content-center mb-1">
+                    <div class="col-10">
+                      <h3 class="text-black">Date</h3>
+                      <p><span class="icon-arrow-right" style="margin-right: 5px;"></span>{{ page.date|date:"D d M Y" }}</p>
+                    </div>
+                  </div>
+                  {% endif %}
+                  {% if page.time %}
+                  <div class="row justify-content-center mb-1">
+                    <div class="col-10">
+                      <h3 class="text-black">Time</h3>
+                      <p><span class="icon-arrow-right" style="margin-right: 5px;"></span>{{ page.time|time:"H:i" }}</p>
+                    </div>
+                  </div>
+                  {% endif %}
+                  {% if page.price %}
+                  <div class="row justify-content-center mb-1">
+                    <div class="col-10">
+                      <h3 class="text-black">Price</h3>
+                      <p><span class="icon-arrow-right" style="margin-right: 5px;"></span>{{ page.price }}</p>
+                    </div>
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- End of Main section -->
+
+
+{% endblock %}
