@@ -47,6 +47,7 @@
             {% endwith %}
             <h2 class="text-black font-weight-light mb-4">{{ workshop.workshop_title }}</h2>
             <p>
+              <p class="mb-4">{{ workshop.introduction|richtext|truncatewords_html:40 }}</p>
               <a href="{% pageurl workshop %}" class="btn btn-primary py-2 px-4 text-white">View</a>
             </p>
           </div>

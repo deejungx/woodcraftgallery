@@ -27,10 +27,8 @@ INSTALLED_APPS = [
     'home',
     'search',
     'exhibition',
-    'artists',
     'news',
     'about',
-    'store',
     'workshop',
 
     'wagtail.contrib.forms',

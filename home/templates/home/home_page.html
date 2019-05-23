@@ -30,16 +30,13 @@
           <div class="d-none d-xl-inline-block">
             <ul class="site-menu js-clone-nav ml-auto list-unstyled d-flex text-right mb-0" data-class="social">
               <li>
-                <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+                <a href="https://www.facebook.com/woodcraftandgallery/" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
               </li>
               <li>
-                <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
+                <a href="https://www.instagram.com/wood.craft.gallery/" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
               </li>
               <li>
-                <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
-              </li>
-              <li>
-                <a href="#" class="pl-3 pr-3"><span class="icon-youtube-play"></span></a>
+                <a href="https://www.youtube.com/channel/UCZiFz7ZbDkDSSJOsAzfkMHQ" class="pl-3 pr-3"><span class="icon-youtube-play"></span></a>
               </li>
             </ul>
           </div>
@@ -65,10 +62,25 @@
             <div class="swiper-slide">
               <div class="image-wrap">
                 <div class="image-info">
-                  <h2 class="mb-3">{{ page.title }}</h2>
+                  {% if page.exhibition_title %}
+                  <div class="cat cat-exhib mx-auto">EXHIBITION</div>
+                  <h2 class="mb-3">{{ page.exhibition_title }}</h2>
+                  {% elif page.posttitle %}
+                  <div class="cat cat-news mx-auto">NEWS</div>
+                  <h2 class="mb-3">{{ page.posttitle }}</h2>
+                  {% elif page.workshop_title %}
+                  <div class="cat cat-work mx-auto">WORKSHOP</div>
+                  <h2 class="mb-3">{{ page.workshop_title }}</h2>
+                  {% endif %}
                   <a href="{% pageurl page %}" class="btn btn-outline-white py-2 px-4">More</a>
                 </div>
+                {% if page.featured_image %}
                 {% image page.featured_image fill-520x816 %}
+                {% else %}
+                  {% if page.main_image %}
+                  {% image page.main_image fill-520x816 %}
+                  {% endif %}
+                {% endif %}
               </div>
             </div>
             {% endfor %}

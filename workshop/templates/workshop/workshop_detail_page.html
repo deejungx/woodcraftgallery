@@ -91,6 +91,13 @@
                   </div>
                   {% endif %}
                 </div>
+                {% if page.booking_button %}
+                <div class="row mx-auto">
+                  <div class="col-12">
+                    <a href="{% slugurl "book-workshop" %}" class="btn btn-primary py-2 px-4 mb-4 text-white" style>Reserve</a>
+                  </div>
+                {% endif %}
+                </div>
               </div>
 
 

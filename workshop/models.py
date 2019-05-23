@@ -2,11 +2,39 @@ from django import forms
 from django.db import models
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel
+from wagtail.admin.edit_handlers import (
+    FieldPanel, FieldRowPanel,
+    InlinePanel, MultiFieldPanel
+)
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
 from wagtail.search import index
+from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
+
+
+class FormField(AbstractFormField):
+    page = ParentalKey('WorkshopFormPage', related_name='custom_form_fields')
+
+
+class WorkshopFormPage(AbstractEmailForm):
+    thank_you_text = RichTextField(blank=True)
+
+    content_panels = AbstractEmailForm.content_panels + [
+        InlinePanel('custom_form_fields', label="Form fields"),
+        FieldPanel('thank_you_text', classname="full"),
+        MultiFieldPanel([
+            FieldRowPanel([
+                FieldPanel('from_address', classname="col6"),
+                FieldPanel('to_address', classname="col6"),
+            ]),
+            FieldPanel('subject'),
+        ], "Email Notification Config"),
+    ]
+
+    def get_form_fields(self):
+        return self.custom_form_fields.all()
+
 
 @register_snippet
 class Medium(models.Model):
@@ -44,6 +72,7 @@ class WorkshopDetailPage(Page):
     date = models.DateField(blank=True, null=True)
     time = models.TimeField(blank=True, null=True)
     extra_information = models.CharField(max_length=250, blank=True, null=True)
+    booking_button = models.BooleanField()
 
     def main_image(self):
         gallery_item = self.workshop_images.first()
