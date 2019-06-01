@@ -96,8 +96,13 @@ WSGI_APPLICATION = 'woodcraftgallery.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'woodcraftgallery',
+        'USER': 'gallery',
+        'PASSWORD': 'satghumti192',
+        'HOST': 'localhost',  # Set to empty string for localhost.
+        'PORT': '',  # Set to empty string for default.
+        'CONN_MAX_AGE': 600,  # number of seconds database connections should persist for
     }
 }
 
